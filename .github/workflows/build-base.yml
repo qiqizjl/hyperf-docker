@@ -23,6 +23,7 @@ jobs:
       matrix:
         php-version: [ '8.0', '8.1', '8.2' ]
         alpine-version: [ '3.14', '3.15', '3.16', '3.17', 'edge' ]
+        platform-architecture: [ 'linux/amd64', 'linux/arm64' ]
         exclude:
           - php-version: '8.2'
             alpine-version: '3.14'
@@ -59,13 +60,7 @@ jobs:
           docker buildx bake \
             -f docker-compose.yml \
             --builder ${{ steps.buildx.outputs.name }} \
-            --set *.platform=linux/amd64  \
-            --set=*.output=type=docker \
-            alpine-base
-          docker buildx bake \
-            -f docker-compose.yml \
-            --builder ${{ steps.buildx.outputs.name }} \
-            --set *.platform=linux/arm64  \
+            --set *.platform=${{ matrix.platform-architecture }}  \
             --set=*.output=type=docker \
             alpine-base
       - name: Push Images to Docker Hub
