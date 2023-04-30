@@ -59,6 +59,7 @@ jobs:
       - name: Build
         run: |
           docker buildx bake \
+            --load \
             -f docker-compose.yml \
             --builder ${{ steps.buildx.outputs.name }} \
             --set *.platform=linux/arm64,linux/amd64  \
