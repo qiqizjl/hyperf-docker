@@ -5,7 +5,7 @@ version: "3.7"
 services:
   # base image
   alpine-base:
-    image: "hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-base"
+    image: "qiqizjl/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-base"
     build:
       context: "${PHP_VERSION}/alpine/base"
       args:
