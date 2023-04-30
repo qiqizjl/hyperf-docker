@@ -58,7 +58,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
       - name: Build
         run: |
-          docker buildx bake -f docker-compose.yml --builder ${{ steps.buildx.outputs.name }} --set *.platform=linux/arm64,linux/amd64 alpine-base
+          docker buildx bake -f docker-compose.yml --builder ${{ steps.buildx.outputs.name }} --set *.platform=linux/arm64,linux/amd64 --load alpine-base
           # COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build alpine-base
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
