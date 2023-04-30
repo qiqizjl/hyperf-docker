@@ -1,6 +1,15 @@
 name: Build Develop
 
-on: [ push ]
+# on: [ push ]
+on:
+  # push:
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'Input your event'
+        required: true
+        default: ''
+        
 env:
   COMPOSER_VERSION: '2.5.5'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

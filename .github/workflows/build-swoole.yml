@@ -1,6 +1,14 @@
 name: Build Swoole
 
-on: [ push ]
+# on: [ push ]
+on:
+  # push:
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'Input your event'
+        required: true
+        default: ''
 env:
   ENGINE: 'swoole'
   SW_VERSION: 'v5.0.2'
