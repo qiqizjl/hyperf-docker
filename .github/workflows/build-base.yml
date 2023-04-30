@@ -19,10 +19,12 @@ jobs:
     env:
       PHP_VERSION: '${{ matrix.php-version }}'
       ALPINE_VERSION: '${{ matrix.alpine-version }}'
+      DOCKER_DEFAULT_PLATFORM: '${{ matrix.platform }}'
     strategy:
       matrix:
         php-version: [ '8.0', '8.1', '8.2' ]
         alpine-version: [ '3.14', '3.15', '3.16', '3.17', 'edge' ]
+        paltform: [ 'linux/amd64', 'linux/armv8' ]
         exclude:
           - php-version: '8.2'
             alpine-version: '3.14'
@@ -47,11 +49,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         run: |
-          docker-compose build alpine-base
+          DOCKER_DEFAULT_PLATFORM=${{ matrix.platform }} docker-compose build alpine-base
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
         run: |
-          docker login --username limingxinleo -p $DOCKERHUB_TOKEN
-          docker push hyperf/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
+          docker login --username qiqizjl -p $DOCKERHUB_TOKEN
+          docker push qiqizjl/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
 
 
