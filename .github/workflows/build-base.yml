@@ -19,7 +19,7 @@ jobs:
     env:
       PHP_VERSION: '${{ matrix.php-version }}'
       ALPINE_VERSION: '${{ matrix.alpine-version }}'
-      DOCKER_DEFAULT_PLATFORM: '${{ matrix.platform }}'
+      # DOCKER_DEFAULT_PLATFORM: '${{ matrix.platform }}'
     strategy:
       matrix:
         php-version: [ '8.0', '8.1', '8.2' ]
@@ -47,10 +47,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
       - name: Build
         run: |
           COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build alpine-base
