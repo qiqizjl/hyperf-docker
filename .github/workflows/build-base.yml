@@ -53,6 +53,7 @@ jobs:
       #   uses: docker/setup-buildx-action@v2
       - name: Build
         run: |
+          uname -a
           COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build alpine-base
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
