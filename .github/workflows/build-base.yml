@@ -19,7 +19,7 @@ jobs:
     env:
       PHP_VERSION: '${{ matrix.php-version }}'
       ALPINE_VERSION: '${{ matrix.alpine-version }}'
-      # DOCKER_DEFAULT_PLATFORM: '${{ matrix.platform }}'
+      DOCKER_DEFAULT_PLATFORM: '${{ matrix.platform }}'
     strategy:
       matrix:
         php-version: [ '8.0', '8.1', '8.2' ]
