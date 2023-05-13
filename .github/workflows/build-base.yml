@@ -55,10 +55,11 @@ jobs:
         uses: docker/setup-buildx-action@v2
         with:
           platforms: linux/amd64,linux/arm64
+          buildkitd-flags: --oci-worker-snapshotter=stargz
       - name: Build
         run: |
           docker info 
-          ocker info --format="{{ .Driver }}"
+          docker info --format="{{ .Driver }}"
           docker buildx bake \
             -f docker-compose.yml \
             --builder ${{ steps.buildx.outputs.name }} \
