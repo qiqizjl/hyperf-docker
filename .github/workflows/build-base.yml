@@ -63,9 +63,11 @@ jobs:
             --set *.platform=linux/amd64,linux/arm64  \
             --set=*.output=type=oci \
             alpine-base
+          docker images
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
         run: |
+          docker images
           docker login --username qiqizjl -p $DOCKERHUB_TOKEN
           docker push qiqizjl/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
 
