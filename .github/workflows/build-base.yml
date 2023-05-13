@@ -61,7 +61,7 @@ jobs:
             -f docker-compose.yml \
             --builder ${{ steps.buildx.outputs.name }} \
             --set *.platform=linux/amd64,linux/arm64  \
-            --set=*.output=type=oci \
+            --push \
             alpine-base
           docker images
       - name: Push Images to Docker Hub
