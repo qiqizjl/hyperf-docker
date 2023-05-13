@@ -57,11 +57,12 @@ jobs:
           platforms: linux/amd64,linux/arm64
       - name: Build
         run: |
+          docker info 
+          ocker info --format="{{ .Driver }}"
           docker buildx bake \
             -f docker-compose.yml \
             --builder ${{ steps.buildx.outputs.name }} \
             --set *.platform=linux/amd64,linux/arm64  \
-            --push \
             alpine-base
           docker images
       - name: Push Images to Docker Hub
