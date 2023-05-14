@@ -63,16 +63,17 @@ jobs:
       - name: Build and push
         uses: docker/bake-action@v3
         with:
-          # push: true
           builder: ${{ steps.buildx.outputs.name }}
           files: docker-compose.yml
           targets: alpine-base
           load: true
-      - name: Push Images to Docker Hub
+      - name: Build and push
         if: ${{ github.event.inputs.event == 'publish' }}
-        run: |
-          docker images
-          # docker login --username qiqizjl -p $DOCKERHUB_TOKEN
-          # docker push qiqizjl/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
-
-
+        uses: docker/bake-action@v3
+        with:
+          push: true
+          builder: ${{ steps.buildx.outputs.name }}
+          files: docker-compose.yml
+          targets: alpine-base
+          set: |
+            *.platform=linux/amd64,linux/arm64
