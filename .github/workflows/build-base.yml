@@ -9,9 +9,6 @@ on:
         required: true
         default: ''
 
-env:
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
-
 jobs:
   build:
     name: Build Base Image
@@ -59,21 +56,13 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: qiqizjl
-          password: ${{ env.DOCKERHUB_TOKEN }}
-      - name: Build and push
+          password: ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
+      - name: Build and Push
         uses: docker/bake-action@v3
         with:
           builder: ${{ steps.buildx.outputs.name }}
           files: docker-compose.yml
-          targets: alpine-base
-          load: true
-      - name: Build and push
-        if: ${{ github.event.inputs.event == 'publish' }}
-        uses: docker/bake-action@v3
-        with:
-          push: true
-          builder: ${{ steps.buildx.outputs.name }}
-          files: docker-compose.yml
-          targets: alpine-base
           set: |
             *.platform=linux/amd64,linux/arm64
+          targets: alpine-base
+          push: ${{ github.event.inputs.event == 'publish' }}

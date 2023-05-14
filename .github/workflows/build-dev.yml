@@ -60,10 +60,10 @@ jobs:
               default => substr($phpVersion, 0, 1)
           };
           echo "::set-output name=version::" . $version . PHP_EOL;
-      - name: Build
-        run: export PHP_BUILD_VERSION=${{ steps.fetch-php-build-version.outputs.version }} && docker-compose build alpine-dev
-      - name: Login
-        run: docker login --username limingxinleo -p ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
-      - name: Push
-        run: docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${{ matrix.alpine-version }}-dev
+      # - name: Build
+      #   run: export PHP_BUILD_VERSION=${{ steps.fetch-php-build-version.outputs.version }} && docker-compose build alpine-dev
+      # - name: Login
+      #   run: docker login --username limingxinleo -p ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
+      # - name: Push
+      #   run: docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${{ matrix.alpine-version }}-dev
 
