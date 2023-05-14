@@ -65,8 +65,8 @@ jobs:
         with:
           # push: true
           builder: ${{ steps.buildx.outputs.name }}
-          file: docker-compose.yml
-          target: alpine-base
+          files: docker-compose.yml
+          targets: alpine-base
           load: true
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
