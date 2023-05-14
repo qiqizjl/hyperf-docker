@@ -60,7 +60,7 @@ jobs:
         with:
           username: qiqizjl
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -  name: Build and push
+      - name: Build and push
         uses: docker/bake-action@v3
         with:
           push: true
@@ -68,17 +68,6 @@ jobs:
           file: docker-compose.yml
           target: alpine-base
           load: true
-      # - name: Build
-      #   run: |
-      #     docker info 
-      #     docker info --format="{{ .Driver }}"
-      #     docker buildx bake \
-      #       -f docker-compose.yml \
-      #       --builder ${{ steps.buildx.outputs.name }} \
-      #       --set *.platform=linux/amd64,linux/arm64  \
-      #       --load \
-      #       alpine-base
-      #     docker images
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
         run: |
