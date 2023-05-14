@@ -56,7 +56,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
       - name: Set up Docker Login
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: qiqizjl
           password: ${{ secrets.DOCKERHUB_TOKEN }}
