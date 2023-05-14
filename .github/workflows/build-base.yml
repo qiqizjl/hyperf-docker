@@ -59,7 +59,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: qiqizjl
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/bake-action@v3
         with:
